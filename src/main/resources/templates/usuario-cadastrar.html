@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Cadastro de Usuário</title>
+    <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"rel="stylesheet">
+    <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<div class="container-fluid">
+    <center><h3>Faça seu cadastro para utilizar o sistema</h3></center><br><br>
+    <div class="row">
+        <div class = "col"></div>
+        <div class="col">
+    <form th:action="@{salvar.html}" method="post" th:object="${usuario}">
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" class="form-control">
+        <strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong>
+        <label>Descrição:</label>
+        <input type="text" th:field="*{descricao}" class="form-control">
+        <strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong>
+        <label>E-mail:</label>
+        <input type="email" th:field="*{email}" class="form-control">
+        <strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong><br/>
+        <label>Código de Acesso:</label>
+        <input type="password" th:field="*{codigoAcesso}" class="form-control">
+        <strong th:if="${#fields.hasErrors('codigoAcesso')}" th:errors="*{codigoAcesso}"></strong> <br/>
+
+        <br/>
+
+        <input class="btn btn-success" type="submit"/>
+        <input class="btn btn-danger" type="reset"/>
+    </form>
+    </div>
+    <div class="col"></div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+</div>
+<div th:replace="fragments/rodape :: rodape"></div>
