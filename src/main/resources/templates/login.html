@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<div class="row">
+
+    <div class="col"></div>
+
+    <div class="col"><br/>
+        <div class="box-parent-login">
+            <div class="well bg-white box-login">
+
+
+                <img src="/src/main/resources/images/UFJF-600-dpi-1024x740.jpg" class="rounded mx-auto d-block" width="250" height="166" alt="Imagem">
+                <br/>
+                <center><h4>Acervo Trabalho 3</h4></center>
+                <br/>
+                <form th:action="@{login.html}" th:object="${usuario}" method="POST">
+
+                   
+
+                        <div class="form-group ls-login-user">
+                           <center> <label>E-mail: <input type="text" th:field="*{email}"/></label>
+                            <strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong>
+                            </center>
+                        </div>
+                        <div class="form-group ls-login-password">
+                            <center>
+                            <label>Código de Acesso: <input type="number" th:field="*{codigoAcesso}"/></label>
+                            <strong th:if="${#fields.hasErrors('codigoAcesso')}" th:errors="*{codigoAcesso}"></strong>
+                            </center>
+                        </div>
+
+                        <input type="submit" class="btn btn-primary btn-lg btn-block"/>
+                        <center>Não possui cadastro?</center>
+                        <center><a href="usuario-cadastrar.html">Cadastre-se agora</a></center>
+                    
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col"></div>
+<br>
+
+</div>
+
+</div>
+<br>
+<div th:replace="fragments/rodape :: rodape"></div>
