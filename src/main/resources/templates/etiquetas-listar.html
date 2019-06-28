@@ -1,0 +1,24 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<a type="button" href="/etiqueta-cadastrar.html" class="btn btn-success"> Nova Etiqueta</a>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Título</th>
+        <th>Descrição</th>
+        <th>URL</th>
+        <th colspan="2">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="etiqueta: ${etiquetas}" th:object="${etiqueta}">
+        <td th:text="*{titulo}"></td>
+        <td th:text="*{descricao}"></td>
+        <td th:text="*{url}"></td>
+        <td><a th:href="@{./editar/{id}(id=*{id})}" class="btn btn-secondary">Editar</a></td>
+        <td><a th:href="@{./deletar/{id}(id=*{id})}" class="btn btn-danger">Excluir</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments/rodape :: rodape"></div>

@@ -43,7 +43,7 @@ public class EtiquetaController {
        return mv;  
     }
 
-    @GetMapping("etiquetas-lista.html")
+    @GetMapping("etiquetas-listar.html")
     public ModelAndView etiquetas(){
         ModelAndView mv = new ModelAndView();
         mv.addObject("etiquetas",etiquetarep.findAll());
