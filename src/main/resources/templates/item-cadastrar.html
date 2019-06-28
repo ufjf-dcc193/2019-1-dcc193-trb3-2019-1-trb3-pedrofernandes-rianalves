@@ -1,20 +1,14 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
 <div class="container-fluid">
-    <center><h3>Faça o Cadastro de uma Etiqueta</h3></center><br><br>
+    <center><h3>Faça o Cadastro de um Item</h3></center><br><br>
     <div class="row">
         <div class = "col"></div>
         <div class="col">
-    <form th:action="@{salvar-etiqueta.html}" method="post" th:object="${etiqueta}">
+    <form th:action="@{salvar-item.html}" method="post" th:object="${item}">
         <label>Título:</label>
         <input type="text" th:field="*{titulo}" class="form-control">
         <strong th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></strong>
-        <label>Descrição:</label>
-        <input type="text" th:field="*{descricao}" class="form-control">
-        <strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong>
-        <label>URL:</label>
-        <input type="text" th:field="*{url}" class="form-control">
-        <strong th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></strong><br/>
-        <br/>
+         <br/>
 
         <input class="btn btn-success" type="submit"/>
         <input class="btn btn-danger" type="reset"/>
