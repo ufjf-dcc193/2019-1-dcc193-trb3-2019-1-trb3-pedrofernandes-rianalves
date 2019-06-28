@@ -18,7 +18,7 @@ public class LoginService {
 
     }
 
-    public Usuario getAvaliador(){
+    public Usuario getUsuario(){
         return usuario;
     }
 

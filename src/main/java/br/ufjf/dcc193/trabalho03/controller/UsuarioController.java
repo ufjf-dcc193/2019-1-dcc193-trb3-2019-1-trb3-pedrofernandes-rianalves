@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import br.ufjf.dcc193.trabalho03.model.Usuario;
 import br.ufjf.dcc193.trabalho03.repository.UsuarioRepository;
 import br.ufjf.dcc193.trabalho03.service.LoginService;
 
+@Controller
 public class UsuarioController {
 
     @Autowired
@@ -97,6 +99,14 @@ public class UsuarioController {
         return mv;
     }
 
+    @GetMapping(value = { "/inicio.html" })
+    public ModelAndView inicio(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        Usuario usuario = loginService.getUsuario();
+        mv.addObject("usuario", usuario);
+        mv.setViewName("inicio");
+        return mv;
+    }
 
     
     
