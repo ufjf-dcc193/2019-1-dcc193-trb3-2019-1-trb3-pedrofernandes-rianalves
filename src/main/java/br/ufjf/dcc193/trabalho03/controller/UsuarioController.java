@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import br.ufjf.dcc193.trabalho03.model.Usuario;
 import br.ufjf.dcc193.trabalho03.repository.UsuarioRepository;
@@ -106,6 +107,12 @@ public class UsuarioController {
         mv.addObject("usuario", usuario);
         mv.setViewName("inicio");
         return mv;
+    }
+
+    @GetMapping("/usuario-deletar/{id}")
+    public RedirectView usuarioDeletar(@PathVariable Long id){
+        usuariorep.deleteById(id);
+        return new RedirectView("/usuario-listar.html");
     }
 
     

@@ -1,0 +1,29 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+<div class="container-fluid">
+    <form class="form-group" th:action="@{/usuario-cadastrar.html}" method="post" th:object="${usuario}">
+        <div class="form-group">
+            <label>Nome:</label>
+            <input class="form-control" type="text" th:field="*{nome}">
+            <strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong>
+        </div>
+        <div class="form-group">
+            <label>Código de Acesso: </label>
+            <textarea class="form-control" th:field="*{codigoAcesso}"></textarea>
+            <strong th:if="${#fields.hasErrors('codigoAcesso')}" th:errors="*{codigoAcesso}"></strong>
+        </div>
+        <div class="form-group">
+            <label>Descrição: </label>
+            <input class="form-control" type="text" th:field="*{descricao}">
+            <strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong>
+        </div>
+        <div class="form-group">
+            <label>E-mail: </label>
+            <input class="form-control" type="text" th:field="*{email}">
+            <strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong>
+        </div>
+        
+        <input class=" btn btn-success" type="submit"/>
+        <input class=" btn btn-danger" type="reset"/>
+    </form>
+</div>
+<div th:replace="fragments/rodape :: rodape"></div>

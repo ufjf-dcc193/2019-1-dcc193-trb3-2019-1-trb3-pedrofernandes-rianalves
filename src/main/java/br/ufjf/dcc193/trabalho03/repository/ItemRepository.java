@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import br.ufjf.dcc193.trabalho03.model.Item;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item,String> {
+public interface ItemRepository extends JpaRepository<Item,Long> {
 
     
 }

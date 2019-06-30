@@ -1,0 +1,24 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<a type="button" href="/usuario-cadastrar.html" class="btn btn-success"> Novo Usuário</a>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Email</th>
+        <th colspan="2">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario: ${usuarios}" th:object="${usuario}">
+        <td th:text="*{nome}"></td>
+        <td th:text="*{descricao}"></td>
+        <td th:text="*{email}"></td>
+        <td><a th:href="@{./usuario-editar/{id}(id=*{id})}" class="btn btn-secondary">Editar</a></td>
+        <td><a th:href="@{./usuario-deletar/{id}(id=*{id})}" class="btn btn-danger">Excluir</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments/rodape :: rodape"></div>

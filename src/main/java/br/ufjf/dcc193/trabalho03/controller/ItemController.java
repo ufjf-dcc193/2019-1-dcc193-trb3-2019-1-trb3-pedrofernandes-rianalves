@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import br.ufjf.dcc193.trabalho03.model.Item;
 import br.ufjf.dcc193.trabalho03.repository.ItemRepository;
@@ -18,7 +19,7 @@ public class ItemController {
     @Autowired
     ItemRepository itemrep;
 
-    @GetMapping( "/item-cadastro.html")
+    @GetMapping( "/item-cadastrar.html")
     public ModelAndView  itemCadastrar()
     {
         Item item = new Item();
@@ -29,7 +30,7 @@ public class ItemController {
     }
 
     @PostMapping(value = "/salvar-item.html")
-    public ModelAndView etiquetaSalvar(@Valid Item item, BindingResult binding){
+    public ModelAndView itemSalvar(@Valid Item item, BindingResult binding){
     
         ModelAndView mv = new ModelAndView();
         if (binding.hasErrors()) {
@@ -42,7 +43,7 @@ public class ItemController {
        return mv;  
     }
 
-    @GetMapping("itens-listar.html")
+    @GetMapping("item-listar.html")
     public ModelAndView itens(){
         ModelAndView mv = new ModelAndView();
         mv.addObject("itens",itemrep.findAll());
@@ -55,6 +56,12 @@ public class ItemController {
         mv.addObject("item", itemrep.getClass());
         mv.setViewName("item-editar");
         return mv;
+    }
+
+    @GetMapping("/item-deletar/{id}")
+    public RedirectView itemDeletar(@PathVariable Long id){
+        itemrep.deleteById(id);
+        return new RedirectView("/item-listar.html");
     }
     
     
