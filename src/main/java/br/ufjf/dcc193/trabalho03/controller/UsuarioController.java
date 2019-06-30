@@ -57,7 +57,7 @@ public class UsuarioController {
     public ModelAndView logout() {
         ModelAndView mv = new ModelAndView();
         loginService.logout();
-        mv.setViewName("redirect:/login.html");
+        mv.setViewName("redirect:/");
         return mv;
     }
     
@@ -85,7 +85,7 @@ public class UsuarioController {
        return mv;  
     }
 
-    @GetMapping("usuarios-lista.html")
+    @GetMapping("usuario-listar.html")
     public ModelAndView usuarios(){
         ModelAndView mv = new ModelAndView();
         mv.addObject("usuarios",usuariorep.findAll());

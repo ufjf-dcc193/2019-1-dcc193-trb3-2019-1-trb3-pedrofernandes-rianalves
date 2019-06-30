@@ -39,7 +39,7 @@ public class ItemController {
             return mv;
         }
         itemrep.save(item);
-        mv.setViewName("redirect:/");
+        mv.setViewName("redirect:/item-listar.html");
        return mv;  
     }
 
