@@ -50,10 +50,10 @@ public class ItemController {
         return mv;
     }
 
-    @GetMapping("item-editar/{id}.html")
+    @GetMapping("item-editar/{id}")
     public ModelAndView itemEditar(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
-        mv.addObject("item", itemrep.getClass());
+        mv.addObject("item", itemrep.findById(id));
         mv.setViewName("item-editar");
         return mv;
     }

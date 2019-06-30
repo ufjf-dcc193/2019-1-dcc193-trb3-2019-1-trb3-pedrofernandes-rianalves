@@ -1,24 +1,31 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
 <div class="container-fluid">
-    <form class="form-group" th:action="@{/etiqueta-cadastrar.html}" method="post" th:object="${etiqueta}">
-        <div class="form-group">
-            <label>Título:</label>
-            <input class="form-control" type="text" th:field="*{titulo}">
-            <strong th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></strong>
+    <center><h3>Faça o Cadastro de uma Etiqueta</h3></center><br><br>
+    <div class="row">
+        <div class = "col"></div>
+        <div class="col">
+            <form th:action="@{/salvar-etiqueta.html}" method="post" th:object="${etiqueta}">
+                <label>Título:</label>
+                <input type="text" th:field="*{titulo}" class="form-control">
+                <strong th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></strong>
+                <label>Descrição:</label>
+                <input type="text" th:field="*{descricao}" class="form-control">
+                <strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong>
+                <label>URL:</label>
+                <input type="text" th:field="*{url}" class="form-control">
+                <strong th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></strong><br/>
+                <br/>
+                <input type="hidden" th:field="*{id}">
+                <input class="btn btn-success" type="submit"/>
+                <input class="btn btn-danger" type="reset"/>
+            </form>
         </div>
-        <div class="form-group">
-            <label>Descrição: </label>
-            <textarea class="form-control" th:field="*{descricao}"></textarea>
-            <strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong>
-        </div>
-        <div class="form-group">
-            <label>Url: </label>
-            <input class="form-control" type="text" th:field="*{url}">
-            <strong th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></strong>
-        </div>
-      
-        <input class=" btn btn-success" type="submit"/>
-        <input class=" btn btn-danger" type="reset"/>
-    </form>
+        <div class="col"></div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
 </div>
 <div th:replace="fragments/rodape :: rodape"></div>

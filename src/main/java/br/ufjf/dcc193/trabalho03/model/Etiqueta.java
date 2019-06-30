@@ -42,6 +42,8 @@ public class Etiqueta {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public void setId(Long id) { this.id = id; }
     
     
     

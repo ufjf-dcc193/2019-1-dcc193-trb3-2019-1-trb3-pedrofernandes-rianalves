@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import br.ufjf.dcc193.trabalho03.model.Etiqueta;
 
 @Repository
-public interface EtiquetaRepository extends JpaRepository<Etiqueta,String>{
+public interface EtiquetaRepository extends JpaRepository<Etiqueta, Long>{
 
     
 }

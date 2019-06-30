@@ -16,8 +16,7 @@
         <tbody>
         <tr th:each="item: ${itens}" th:object="${item}">
             <td th:text="*{titulo}"></td>
-            <td><a th:href="@{./item-editar/{id}(id=*{id})}" class="btn btn-secondary">Vínculos</a></td>
-            <td><a th:href="@{./item-deletar/{id}(id=*{id})}" class="btn btn-danger">Excluir</a></td>
+            <td><a th:href="@{./vinculo-listar/{id}(id=*{id})}" class="btn btn-secondary">Vínculos</a></td>
         </tr>
         </tbody>
     </table>

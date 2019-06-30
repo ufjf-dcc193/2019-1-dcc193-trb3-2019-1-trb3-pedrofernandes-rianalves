@@ -1,0 +1,25 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+<div class="container-fluid">
+    <center><h3>Faça a Edição de um Item</h3></center><br><br>
+    <div class="row">
+        <div class = "col"></div>
+        <div class="col">
+            <form th:action="@{/salvar-item.html}" method="post" th:object="${item}">
+                <label>Título:</label>
+                <input type="text" th:field="*{titulo}" class="form-control">
+                <strong th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></strong>
+                <br/>
+                <input type="hidden" th:field="*{id}">
+                <input class="btn btn-success" type="submit"/>
+                <input class="btn btn-danger" type="reset"/>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+</div>
+<div th:replace="fragments/rodape :: rodape"></div>

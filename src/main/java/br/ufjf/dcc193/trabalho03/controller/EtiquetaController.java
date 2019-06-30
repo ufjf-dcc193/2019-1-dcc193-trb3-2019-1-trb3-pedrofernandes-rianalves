@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.ufjf.dcc193.trabalho03.model.Etiqueta;
 import br.ufjf.dcc193.trabalho03.repository.EtiquetaRepository;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class EtiquetaController {
@@ -19,7 +20,7 @@ public class EtiquetaController {
     @Autowired
     EtiquetaRepository etiquetarep;
 
-    @GetMapping( "/etiqueta-cadastro.html")
+    @GetMapping( "/etiqueta-cadastrar.html")
     public ModelAndView etiquetaCadastrar()
     {
         Etiqueta etiqueta = new Etiqueta();
@@ -39,7 +40,7 @@ public class EtiquetaController {
             return mv;
         }
         etiquetarep.save(etiqueta);
-        mv.setViewName("redirect:/");
+        mv.setViewName("redirect:/etiquetas-listar.html");
        return mv;  
     }
 
@@ -50,12 +51,18 @@ public class EtiquetaController {
         return mv;
     }
 
-    @GetMapping("etiqueta-editar/{id}.html")
-    public ModelAndView areaEditar(@PathVariable Long id){
+    @GetMapping("etiqueta-editar/{id}")
+    public ModelAndView etiquetaEditar(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
-        mv.addObject("etiqueta", etiquetarep.getClass());
+        mv.addObject("etiqueta", etiquetarep.findById(id));
         mv.setViewName("etiqueta-editar");
         return mv;
+    }
+
+    @GetMapping("/etiqueta-deletar/{id}")
+    public RedirectView etiquetaDeletar(@PathVariable Long id){
+        etiquetarep.deleteById(id);
+        return new RedirectView("/etiquetas-listar.html");
     }
     
 }

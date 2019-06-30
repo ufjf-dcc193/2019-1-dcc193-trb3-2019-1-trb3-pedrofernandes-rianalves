@@ -98,10 +98,10 @@ public class UsuarioController {
         return mv;
     }
 
-    @GetMapping("usuario-editar/{id}.html")
+    @GetMapping("/usuario-editar/{id}")
     public ModelAndView areaEditar(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
-        mv.addObject("usuario", usuariorep.getClass());
+        mv.addObject("usuario", usuariorep.findById(id));
         mv.setViewName("usuario-editar");
         return mv;
     }

@@ -1,0 +1,24 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+<h3>Estes são os vínculos do item: <span th:text="${item.titulo}"></span></h3>
+<a type="button" href="@{./vinculo-cadastrar/{id}(id=${item.id})}" class="btn btn-success"> Novo Vínculo</a>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Item Origem</th>
+        <th>Item Destino</th>
+        <th colspan="4">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vinculos: ${vinculos}" th:object="${vinculo}">
+        <td th:text="*{itemOrigem}"></td>
+        <td th:text="*{itemDestino}"></td>
+        <td><a th:href="@{./vinculo-anotar/{id}(id=*{id})}" class="btn btn-primary">Anotar</a></td>
+        <td><a th:href="@{./vinculo-etiquetar/{id}(id=*{id})}" class="btn btn-primary">Etiquetar</a></td>
+        <td><a th:href="@{./vinculo-editar/{id}(id=*{id})}" class="btn btn-secondary">Editar</a></td>
+        <td><a th:href="@{./vinculo-deletar/{id}(id=*{id})}" class="btn btn-danger">Excluir</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments/rodape :: rodape"></div>
