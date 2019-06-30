@@ -1,5 +1,7 @@
 package br.ufjf.dcc193.trabalho03.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import br.ufjf.dcc193.trabalho03.model.Item;
 import br.ufjf.dcc193.trabalho03.model.Usuario;
+import br.ufjf.dcc193.trabalho03.repository.ItemRepository;
 import br.ufjf.dcc193.trabalho03.repository.UsuarioRepository;
 import br.ufjf.dcc193.trabalho03.service.LoginService;
 
@@ -22,6 +26,8 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuariorep;
 
+    @Autowired ItemRepository itemrep;
+    
     @Autowired
     private LoginService loginService;
 
@@ -104,7 +110,9 @@ public class UsuarioController {
     public ModelAndView inicio(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         Usuario usuario = loginService.getUsuario();
+        List<Item> itens = itemrep.findAll();
         mv.addObject("usuario", usuario);
+        mv.addObject("itens", itens);
         mv.setViewName("inicio");
         return mv;
     }

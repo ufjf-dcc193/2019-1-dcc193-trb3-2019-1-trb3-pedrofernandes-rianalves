@@ -4,9 +4,23 @@
     <center><h1>Acervo da Instituição</h1></center>
     <br/><br/>
     <h2>Seja bem vindo, <span th:text="${usuario.nome}"></span></h2>
-    <h4> Escolha entre os trabalhos da sua Área para iniciar uma revisão</h4>
+    <h4> Escolha um dos itens para gerenciar</h4>
     <br/>
-
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Título</th>
+            <th colspan="2">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${itens}" th:object="${item}">
+            <td th:text="*{titulo}"></td>
+            <td><a th:href="@{./item-editar/{id}(id=*{id})}" class="btn btn-secondary">Vínculos</a></td>
+            <td><a th:href="@{./item-deletar/{id}(id=*{id})}" class="btn btn-danger">Excluir</a></td>
+        </tr>
+        </tbody>
+    </table>
     <br/>
 
 </div>
