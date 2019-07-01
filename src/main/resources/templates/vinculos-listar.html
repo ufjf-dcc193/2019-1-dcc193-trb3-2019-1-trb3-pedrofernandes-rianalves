@@ -1,6 +1,6 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
 <h3>Estes são os vínculos do item: <span th:text="${item.titulo}"></span></h3>
-<a type="button" href="@{./vinculo-cadastrar/{id}(id=${item.id})}" class="btn btn-success"> Novo Vínculo</a>
+<a type="button" th:href="@{/vinculo-cadastrar/{id}(id=${item.id})}" class="btn btn-success"> Novo Vínculo</a>
 <table class="table table-striped">
     <thead>
     <tr>

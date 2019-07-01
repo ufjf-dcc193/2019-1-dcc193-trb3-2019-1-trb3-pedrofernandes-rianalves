@@ -25,27 +25,27 @@ public class VinculoController {
     @Autowired
     private ItemRepository itemRep;
 
-    @GetMapping( "/vinculo-cadastrar.html")
-    public ModelAndView vinculoCadastrar()
+    @GetMapping( "/vinculo-cadastrar/{id}")
+    public ModelAndView vinculoCadastrar(@PathVariable Long id)
     {
+
         Vinculo vinculo = new Vinculo();
         ModelAndView mv = new ModelAndView();
+        mv.addObject("itens", itemRep.findAll());
+        mv.addObject("itemId",id);
         mv.setViewName("vinculo-cadastrar");
         mv.addObject("vinculo", vinculo);
         return mv;
     }
 
-    @PostMapping(value = "/salvar-vinculo.html")
-    public ModelAndView itemSalvar(@Valid Vinculo vinculo, BindingResult binding){
-
+    @PostMapping("/salvar-vinculo/{id}")
+    public ModelAndView vinculoSalvar(@PathVariable Long id, Vinculo vinculo){
         ModelAndView mv = new ModelAndView();
-        if (binding.hasErrors()) {
-            mv.setViewName("vinculo-cadastrar");
-            mv.addObject("vinculo", vinculo);
-            return mv;
-        }
+        Item item = itemRep.findById(id).get();
         vinculoRep.save(vinculo);
-        mv.setViewName("redirect:/vinculo-listar.html");
+        item.getVinculos().add(vinculo);
+        itemRep.save(item);
+        mv.setViewName("redirect:/vinculo-listar/{id}");
         return mv;
     }
 
