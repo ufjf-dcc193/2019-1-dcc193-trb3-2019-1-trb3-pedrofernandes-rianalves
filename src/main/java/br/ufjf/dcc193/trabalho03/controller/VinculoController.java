@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -53,8 +54,9 @@ public class VinculoController {
     public ModelAndView vinculos(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
         Optional<Item> item = itemRep.findById(id);
+        List<Vinculo> vinculos = vinculoRep.findAllByItemDestinoOrItemOrigem(item.get(), item.get());
         mv.addObject("item", item.get());
-        mv.addObject("vinculos",vinculoRep.findAllByItemDestinoOrItemOrigem(item.get(), item.get()));
+        mv.addObject("vinculos", vinculos);
         mv.setViewName("vinculos-listar");
         return mv;
     }
