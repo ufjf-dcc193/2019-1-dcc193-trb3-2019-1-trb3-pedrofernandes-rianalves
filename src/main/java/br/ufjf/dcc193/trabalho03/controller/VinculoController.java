@@ -62,7 +62,7 @@ public class VinculoController {
     }
 
     @GetMapping("vinculo-editar/{id}")
-    public ModelAndView itemEditar(@PathVariable Long id){
+    public ModelAndView vinculoEditar(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
         mv.addObject("item", vinculoRep.findById(id));
         mv.setViewName("vinculo-editar");
@@ -70,8 +70,20 @@ public class VinculoController {
     }
 
     @GetMapping("/vinculo-deletar/{id}")
-    public RedirectView itemDeletar(@PathVariable Long id){
+    public RedirectView vinculoDeletar(@PathVariable Long id){
         vinculoRep.deleteById(id);
         return new RedirectView("/inicio.html");
+    }
+
+    @GetMapping("/vinculo-anotar/{id}")
+    public ModelAndView vinculoAnotar(@PathVariable Long id){
+        ModelAndView mv = new ModelAndView();
+        return mv;
+    }
+
+    @GetMapping("/vinculo-etiquetar/{id}")
+    public ModelAndView vinculoEtiquetar(@PathVariable Long id){
+        ModelAndView mv = new ModelAndView();
+        return mv;
     }
 }
