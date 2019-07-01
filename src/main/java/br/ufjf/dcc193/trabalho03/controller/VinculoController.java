@@ -78,12 +78,14 @@ public class VinculoController {
     @GetMapping("/vinculo-anotar/{id}")
     public ModelAndView vinculoAnotar(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
+
         return mv;
     }
 
     @GetMapping("/vinculo-etiquetar/{id}")
     public ModelAndView vinculoEtiquetar(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
+
         return mv;
     }
 }
