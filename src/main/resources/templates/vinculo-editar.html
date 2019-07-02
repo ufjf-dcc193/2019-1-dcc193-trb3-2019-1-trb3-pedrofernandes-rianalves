@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+<div class="container-fluid">
+    <center><h3>Faça o cadastro de um vínculo</h3></center><br><br>
+    <div class="row">
+        <div class = "col"></div>
+        <div class="col">
+            <form th:action="@{/salvar-vinculo/{id}(id = ${itemId})}" method="post" th:object="${vinculo}">
+                <label>Item Origem:</label>
+                <select name="itemOrigem" class="form-control">
+                    <option th:each="item: ${itens}"
+                            th:field="${vinculo.itemOrigem}"
+                            th:object="${item}" th:value="*{id}"
+                            th:text="*{titulo}">
+                    </option>
+                </select>
+                <label>Item Destino:</label>
+                <select name="itemDestino" class="form-control">
+                    <option th:each="item: ${itens}"
+                            th:field="${vinculo.itemDestino}"
+                            th:object="${item}" th:value="*{id}"
+                            th:text="*{titulo}">
+                    </option>
+                </select>
+                <input type="hidden" th:field="*{id}">
+                <br/>
+                <input class="btn btn-success" type="submit"/>
+                <input class="btn btn-danger" type="reset"/>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    <br/>
 
-</body>
-</html>
+</div>
+<div th:replace="fragments/rodape :: rodape"></div>

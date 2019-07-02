@@ -1,9 +1,14 @@
 package br.ufjf.dcc193.trabalho03.controller;
 
+import br.ufjf.dcc193.trabalho03.model.Anotacao;
+import br.ufjf.dcc193.trabalho03.model.Etiqueta;
 import br.ufjf.dcc193.trabalho03.model.Item;
 import br.ufjf.dcc193.trabalho03.model.Vinculo;
+import br.ufjf.dcc193.trabalho03.repository.AnotacaoRepository;
+import br.ufjf.dcc193.trabalho03.repository.EtiquetaRepository;
 import br.ufjf.dcc193.trabalho03.repository.ItemRepository;
 import br.ufjf.dcc193.trabalho03.repository.VinculoRepository;
+import br.ufjf.dcc193.trabalho03.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,6 +30,12 @@ public class VinculoController {
 
     @Autowired
     private ItemRepository itemRep;
+
+    @Autowired
+    private EtiquetaRepository etiquetaRep;
+
+    @Autowired
+    private AnotacaoRepository anotacaoRep;
 
     @GetMapping( "/vinculo-cadastrar/{id}")
     public ModelAndView vinculoCadastrar(@PathVariable Long id)
@@ -78,14 +89,40 @@ public class VinculoController {
     @GetMapping("/vinculo-anotar/{id}")
     public ModelAndView vinculoAnotar(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
+        mv.addObject("vinculo", vinculoRep.findById(id).get());
+        mv.setViewName("vinculo-anotar");
+        return mv;
+    }
 
+    @PostMapping("/vinculo-anotar/{id}")
+    public ModelAndView salvarAnotacao(@PathVariable Long id, Anotacao anotacao){
+        ModelAndView mv = new ModelAndView();
+        LoginService service = new LoginService();
+        Vinculo vinculo = vinculoRep.findById(id).get();
+        vinculo.getAnotacoes().add(anotacao);
+        vinculoRep.save(vinculo);
+        anotacao.setUsuario(service.getUsuario());
+        anotacaoRep.save(anotacao);
+        mv.setViewName("redirect:/inicio.html");
         return mv;
     }
 
     @GetMapping("/vinculo-etiquetar/{id}")
     public ModelAndView vinculoEtiquetar(@PathVariable Long id){
         ModelAndView mv = new ModelAndView();
+        mv.addObject("etiquetas", etiquetaRep.findAll());
+        mv.addObject("vinculo", vinculoRep.findById(id).get());
+        mv.setViewName("vinculo-etiquetar");
+        return mv;
+    }
 
+    @PostMapping("/vinculo-etiquetar/{id}")
+    public ModelAndView salvarEtiqueta(@PathVariable Long id, Vinculo vinculoEtiquetas){
+        ModelAndView mv = new ModelAndView();
+        Vinculo vinculo = vinculoRep.findById(id).get();
+        vinculo.setEtiquetas(vinculoEtiquetas.getEtiquetas());
+        vinculoRep.save(vinculo);
+        mv.setViewName("redirect:/inicio.html");
         return mv;
     }
 }
