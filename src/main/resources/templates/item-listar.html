@@ -5,12 +5,14 @@
     <thead>
     <tr>
         <th>Título</th>
-        <th colspan="2">Ações</th>
+        <th colspan="4">Ações</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="item: ${itens}" th:object="${item}">
         <td th:text="*{titulo}"></td>
+        <td><a th:href="@{/anotacao-item-listar/{id}(id=*{id})}" class="btn btn-primary">Anotações</a></td>
+        <td><a th:href="@{/item-etiquetar/{id}(id=*{id})}" class="btn btn-primary">Etiquetar</a></td>
         <td><a th:href="@{./item-editar/{id}(id=*{id})}" class="btn btn-secondary">Editar</a></td>
         <td><a th:href="@{./item-deletar/{id}(id=*{id})}" class="btn btn-danger">Excluir</a></td>
     </tr>

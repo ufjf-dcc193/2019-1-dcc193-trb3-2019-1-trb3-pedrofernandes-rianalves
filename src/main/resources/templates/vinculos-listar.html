@@ -13,7 +13,7 @@
     <tr th:each="vinculo: ${vinculos}" th:object="${vinculo}">
         <td th:text="*{itemOrigem.titulo}"></td>
         <td th:text="*{itemDestino.titulo}"></td>
-        <td><a th:href="@{/vinculo-anotar/{id}(id=*{id})}" class="btn btn-primary">Anotar</a></td>
+        <td><a th:href="@{/anotacao-vinculo-listar/{id}(id=*{id})}" class="btn btn-primary">Anotações</a></td>
         <td><a th:href="@{/vinculo-etiquetar/{id}(id=*{id})}" class="btn btn-primary">Etiquetar</a></td>
         <td><a th:href="@{/vinculo-editar/{id}(id=*{id})}" class="btn btn-secondary">Editar</a></td>
         <td><a th:href="@{/vinculo-deletar/{id}(id=*{id})}" class="btn btn-danger">Excluir</a></td>

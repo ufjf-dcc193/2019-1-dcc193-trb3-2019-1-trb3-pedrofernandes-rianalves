@@ -1,12 +1,12 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
 <div class="container-fluid">
-    <center><h5>Anotar vínculo entre <span th:text="${vinculo.itemOrigem.titulo}"></span> e <span th:text="${vinculo.itemDestino.titulo}"></span>.
+    <center><h5>Anotar item <span th:text="${item.titulo}"></span>.
     </h5></center>
     <br><br>
     <div class="row">
         <div class = "col"></div>
         <div class="col">
-            <form th:action="@{/vinculo-anotar/{id}(id = ${vinculo.id})}" method="post" th:object="${anotacao}">
+            <form th:action="@{/item-anotar/{id}(id = ${item.id})}" method="post" th:object="${anotacao}">
                 <label>Título:</label>
                 <input type="text" th:field="*{titulo}" class="form-control">
                 <label>Descrição:</label>
@@ -16,6 +16,7 @@
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="*{dataInclusao}">
                 <br/>
+
                 <input class="btn btn-success" type="submit"/>
                 <input class="btn btn-danger" type="reset"/>
             </form>
