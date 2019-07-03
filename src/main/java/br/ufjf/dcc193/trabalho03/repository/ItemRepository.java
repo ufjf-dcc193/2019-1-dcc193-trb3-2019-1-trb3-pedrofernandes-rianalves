@@ -12,6 +12,6 @@ import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item,Long> {
-    @Query("SELECT i FROM Item i WHERE :etiqueta IN (i.etiquetas)")
+    @Query("SELECT DISTINCT i FROM Item i JOIN i.etiquetas e  WHERE :etiqueta IN (e)")
     List<Item> findAllByEtiqueta(@Param("etiqueta") Etiqueta etiqueta);
 }

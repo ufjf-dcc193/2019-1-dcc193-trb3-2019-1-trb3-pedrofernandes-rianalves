@@ -2,11 +2,8 @@ package br.ufjf.dcc193.trabalho03.model;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
 @Entity
 public class Item {
 
@@ -18,7 +15,7 @@ public class Item {
     @OneToMany
     List<Anotacao> anotacoes;
 
-    @OneToMany
+    @ManyToMany
     List<Etiqueta> etiquetas;
 
     @OneToMany

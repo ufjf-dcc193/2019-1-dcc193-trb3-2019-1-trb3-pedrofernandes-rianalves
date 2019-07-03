@@ -1,0 +1,33 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<div class="container-fluid">
+<form th:action="@{/item-por-etiqueta}" method="post" th:object="${item}">
+    <label>Etiquetas:</label>
+    <select class="form-control"  th:field="*{etiquetas}" name="etiquetas">
+        <option th:each="etiqueta: ${etiquetas}"
+                th:value="${etiqueta.id}"
+                th:text="${etiqueta.titulo}">
+        </option>
+    </select>
+    <br/>
+    <input class="btn btn-success" type="submit"/>
+    <input class="btn btn-danger" type="reset"/>
+</form>
+</div>
+<div class="container-fluid row" th:if="${itens}">
+    <h5>Segue a lista de itens com a etiqueta <span th:text="${etiquetaNome}"></span></h5>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Título</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${itens}" th:object="${item}">
+            <td th:text="*{titulo}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/rodape :: rodape"></div>

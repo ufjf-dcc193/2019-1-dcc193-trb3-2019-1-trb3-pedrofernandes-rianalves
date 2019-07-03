@@ -3,6 +3,7 @@ package br.ufjf.dcc193.trabalho03.controller;
 import javax.validation.Valid;
 
 import br.ufjf.dcc193.trabalho03.model.Anotacao;
+import br.ufjf.dcc193.trabalho03.model.Etiqueta;
 import br.ufjf.dcc193.trabalho03.repository.AnotacaoRepository;
 import br.ufjf.dcc193.trabalho03.repository.EtiquetaRepository;
 import br.ufjf.dcc193.trabalho03.service.LoginService;
@@ -127,11 +128,31 @@ public class ItemController {
         anotacao.setUsuario(service.getUsuario());
         if(anotacao.getId()==null) {
             item.getAnotacoes().add(anotacao);
-            itemRep.save(item);
         }
         anotacaoRep.save(anotacao);
+        itemRep.save(item);
         mv.setViewName("redirect:/inicio.html");
         return mv;
     }
 
+    @GetMapping("/item-por-etiqueta.html")
+    public ModelAndView itemPorEtiqueta(){
+        ModelAndView mv = new ModelAndView();
+        Item item = new Item();
+        mv.addObject("item", item);
+        mv.addObject("etiquetas", etiquetaRep.findAll());
+        mv.setViewName("item-por-etiqueta");
+        return mv;
+    }
+
+    @PostMapping("/item-por-etiqueta")
+    public ModelAndView itemPorEtiquetaPost(Item item){
+        ModelAndView mv = new ModelAndView();
+        Etiqueta etiqueta = item.getEtiquetas().get(0);
+        mv.addObject("itens", itemRep.findAllByEtiqueta(etiqueta));
+        mv.addObject("etiquetaNome", etiqueta.getTitulo());
+        mv.addObject("etiquetas", etiquetaRep.findAll());
+        mv.setViewName("item-por-etiqueta");
+        return mv;
+    }
 }
