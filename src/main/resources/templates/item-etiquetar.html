@@ -1,12 +1,12 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
 <div class="container-fluid">
-    <center><h5>Etiquetar vínculo entre <span th:text="${vinculo.itemOrigem.titulo}"></span> e <span th:text="${vinculo.itemDestino.titulo}"></span>.
+    <center><h5>Etiquetar item <span th:text="${item.titulo}"></span>.
     </h5></center>
     <br><br>
     <div class="row">
         <div class = "col"></div>
         <div class="col">
-            <form th:action="@{/vinculo-etiquetar/{id}(id = ${vinculo.id})}" method="post" th:object="${vinculo}">
+            <form th:action="@{/item-etiquetar/{id}(id = ${item.id})}" method="post" th:object="${item}">
                 <label>Etiquetas:</label>
                 <select class="form-control" th:field="*{etiquetas}" name="etiquetas" multiple="multiple">
                     <option  th:each="etiqueta: ${etiquetas}"
@@ -18,7 +18,7 @@
                 <br/>
 
                 <input class="btn btn-success" type="submit"/>
-                <a class="btn btn-danger" th:href="@{/vinculo-deletar-etiqueta/{id} (id= ${item.id})}">Deletar Etiqueta</a>
+                <a class="btn btn-danger" th:href="@{/item-deletar-etiqueta/{id} (id= ${item.id})}">Deletar Etiqueta</a>
             </form>
         </div>
         <div class="col"></div>

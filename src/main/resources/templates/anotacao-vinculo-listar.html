@@ -1,0 +1,28 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<a th:href="@{/vinculo-anotar/{id}(id=*{id})}" class="btn btn-success"> Nova Anotação</a>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Título</th>
+        <th>Descrição</th>
+        <th>Url</th>
+        <th>Data Inclusão</th>
+        <th>Data Alteração</th>
+        <th colspan="2">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="anotacao: ${anotacoes}" th:object="${anotacao}">
+        <td th:text="*{titulo}"></td>
+        <td th:text="*{descricao}"></td>
+        <td th:text="*{url}"></td>
+        <td th:text="*{dataInclusao}"></td>
+        <td th:text="*{dataAlteracao}"></td>
+        <td><a th:href="@{/anotacao-vinculo-editar/{id}/{idAnotacao}(id=${vinculo.id}, idAnotacao=*{id})}" class="btn btn-secondary">Editar</a></td>
+        <td><a th:href="@{/anotacao-vinculo-deletar/{id}/{idAnotacao}(id=${vinculo.id}, idAnotacao=*{id})}" class="btn btn-danger">Excluir</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments/rodape :: rodape"></div>
