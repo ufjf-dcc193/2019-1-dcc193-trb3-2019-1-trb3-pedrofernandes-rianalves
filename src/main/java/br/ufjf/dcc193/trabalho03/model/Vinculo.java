@@ -16,7 +16,7 @@ public class Vinculo {
     private Item itemDestino;
     @ManyToMany
     List<Etiqueta> etiquetas;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     List<Anotacao> anotacoes; 
 
     public Long getId() {

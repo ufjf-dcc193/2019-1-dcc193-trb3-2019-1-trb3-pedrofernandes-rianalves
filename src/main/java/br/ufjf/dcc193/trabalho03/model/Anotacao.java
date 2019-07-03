@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 public class Anotacao {
@@ -15,8 +17,8 @@ public class Anotacao {
     private String titulo;
     private String descricao; 
     private String url;
-    private String dataInclusao;
-    private String dataAlteracao;
+    private LocalDateTime dataInclusao;
+    private LocalDateTime dataAlteracao;
 
 
     @ManyToOne
@@ -41,14 +43,6 @@ public class Anotacao {
         return url;
     }
 
-    public String getDataInclusao() {
-        return dataInclusao;
-    }
-
-    public String getDataAlteracao() {
-        return dataAlteracao;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -61,15 +55,27 @@ public class Anotacao {
         this.descricao = descricao;
     }
 
-   public void setUrl(String url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public void setDataInclusao(String dataInclusao) {
+    public LocalDateTime getDataInclusao() {
+        return dataInclusao;
+    }
+
+    public void setDataInclusao(LocalDateTime dataInclusao) {
         this.dataInclusao = dataInclusao;
     }
-  
-    public void setDataAlteracao(String dataAlteracao) {
+
+    public LocalDateTime getDataAlteracao() {
+        return dataAlteracao;
+    }
+
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

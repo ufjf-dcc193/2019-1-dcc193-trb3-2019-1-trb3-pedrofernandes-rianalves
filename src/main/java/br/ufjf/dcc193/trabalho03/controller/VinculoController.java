@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,26 +88,7 @@ public class VinculoController {
         return new RedirectView("/inicio.html");
     }
 
-    @GetMapping("/vinculo-anotar/{id}")
-    public ModelAndView vinculoAnotar(@PathVariable Long id){
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("vinculo", vinculoRep.findById(id).get());
-        mv.setViewName("vinculo-anotar");
-        return mv;
-    }
 
-    @PostMapping("/vinculo-anotar/{id}")
-    public ModelAndView salvarAnotacao(@PathVariable Long id, Anotacao anotacao){
-        ModelAndView mv = new ModelAndView();
-        LoginService service = new LoginService();
-        Vinculo vinculo = vinculoRep.findById(id).get();
-        vinculo.getAnotacoes().add(anotacao);
-        vinculoRep.save(vinculo);
-        anotacao.setUsuario(service.getUsuario());
-        anotacaoRep.save(anotacao);
-        mv.setViewName("redirect:/inicio.html");
-        return mv;
-    }
 
     @GetMapping("/vinculo-etiquetar/{id}")
     public ModelAndView vinculoEtiquetar(@PathVariable Long id){
@@ -122,6 +105,45 @@ public class VinculoController {
         Vinculo vinculo = vinculoRep.findById(id).get();
         vinculo.setEtiquetas(vinculoEtiquetas.getEtiquetas());
         vinculoRep.save(vinculo);
+        mv.setViewName("redirect:/inicio.html");
+        return mv;
+    }
+
+    @GetMapping("/vinculo-deletar-etiqueta/{id}")
+    public RedirectView vinculoDeletarEtiqueta(@PathVariable Long id){
+        Vinculo vinculo = new Vinculo();
+        vinculo = vinculoRep.findById(id).get();
+        vinculo.setEtiquetas(null);
+        vinculoRep.save(vinculo);
+        return new RedirectView("redirect:/inicio.html");
+    }
+
+
+    @GetMapping("/vinculo-anotar/{id}")
+    public ModelAndView vinculoAnotar(@PathVariable Long id){
+        ModelAndView mv = new ModelAndView();
+        Anotacao anotacao = new Anotacao();
+        mv.addObject("anotacao", anotacao);
+        mv.addObject("vinculo", vinculoRep.findById(id).get());
+        mv.setViewName("vinculo-anotar");
+        return mv;
+    }
+
+    @PostMapping("/vinculo-anotar/{id}")
+    public ModelAndView salvarAnotacao(@PathVariable Long id, Anotacao anotacao){
+        ModelAndView mv = new ModelAndView();
+        LoginService service = new LoginService();
+        Vinculo vinculo = vinculoRep.findById(id).get();
+        if(anotacao.getDataInclusao() == null){
+            anotacao.setDataInclusao(LocalDateTime.now());
+        }
+        anotacao.setDataAlteracao(LocalDateTime.now());
+        anotacao.setUsuario(service.getUsuario());
+        if(anotacao.getId()==null){
+            vinculo.getAnotacoes().add(anotacao);
+            vinculoRep.save(vinculo);
+        }
+        anotacaoRep.save(anotacao);
         mv.setViewName("redirect:/inicio.html");
         return mv;
     }
